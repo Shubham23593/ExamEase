@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎓 ExamEase — Academic NLP & AI-Powered Question Generator
 
-## Getting Started
+[![Next.js](https://img.shields.io/badge/Next.js-16.3-black?style=flat&logo=next.js)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19.2-blue?style=flat&logo=react)](https://react.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-v4-38bdf8?style=flat&logo=tailwindcss)](https://tailwindcss.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-7.6-green?style=flat&logo=mongodb)](https://www.mongodb.com/)
+[![Gemini](https://img.shields.io/badge/Google_Gemini-2.5_Flash-8e75ff?style=flat&logo=google)](https://aistudio.google.com/)
 
-First, run the development server:
+> **ExamEase** transforms academic lecture notes, textbook chapters, and PDF documents into syllabus-grounded, verified Multiple Choice Questions (MCQs) using a hybrid **deterministic NLP pipeline + Google Gemini 2.5 Flash** architecture.
 
+📖 **For the exhaustive, complete technical documentation from A to Z, please read [PROJECT_DOCUMENTATION.md](file:///c:/shubham%20dalvi%20project/ExamEase/PROJECT_DOCUMENTATION.md).**
+
+---
+
+## 🌟 Key Highlights
+
+- **Classical NLP Pre-processing**: 7-stage deterministic NLP engine (Tokenization, POS Tagging, Sentence Segmentation, Lemmatization, N-Gram frequency analysis, and Concept/Definition scoring).
+- **Universal PDF Extraction via Gemini Vision OCR**: Seamlessly handles text, scanned pages, handwritten notes, and documents with non-standard font encodings (`Identity-H` / CID).
+- **Grounded AI Generation**: Generates MCQs strictly grounded on extracted source concepts (zero external hallucinations).
+- **Automated Quality & Deduplication Filter**: Jaccard lexical similarity analysis eliminates duplicate questions; guarantees 4 balanced options and verified citations.
+- **Interactive Teacher Dashboard**: Edit questions in real-time, modify distractors, or regenerate single questions in-place.
+- **Student Examination Engine**: Built-in test taking interface with timers, question navigator, instant scoring, and concept citations.
+- **Enterprise-Grade Security**: Salted `bcryptjs` password hashing and stateless JWT authentication stored in HTTP-only cookies.
+
+---
+
+## 🚀 Quick Start Guide
+
+### 1. Prerequisites
+- **Node.js**: `v20.x` or `v22.x`
+- **MongoDB**: Running locally on port `27017` or a MongoDB Atlas URI
+
+### 2. Installation
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Clone the repository and navigate inside
+cd ExamEase
+
+# Install dependencies
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. Environment Configuration
+Create a `.env.local` file by copying the template:
+```bash
+copy .env.example .env.local
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Inside `.env.local`:
+```env
+DATABASE_URL=mongodb://127.0.0.1:27017/examease
+JWT_SECRET=your_super_secret_jwt_key
+GEMINI_API_KEY=your_gemini_api_key_here
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
+*(Note: If `GEMINI_API_KEY` is omitted, ExamEase automatically falls back to an offline mock generator).*
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4. Running the Application
 
-## Learn More
+```bash
+# Start development server with Turbopack
+npm run dev
 
-To learn more about Next.js, take a look at the following resources:
+# Or build for production
+npm run build
+npm run start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Open **[http://localhost:3000](http://localhost:3000)** in your browser.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📁 Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```text
+ExamEase/
+├── PROJECT_DOCUMENTATION.md   # Complete A-to-Z Technical Reference
+├── .env.example               # Environment variables template
+├── src/
+│   ├── app/                   # Next.js App Router (Pages, Layouts & API routes)
+│   ├── components/            # UI components (MCQ preview cards, NLP concept inspector, navbar)
+│   ├── lib/                   # MongoDB client (db.ts) and JWT authentication (auth.ts)
+│   ├── services/
+│   │   ├── ai/                # Gemini 2.5 Flash service & Mock AI service
+│   │   ├── nlp/               # Tokenizer, POS tagger, lemmatizer, concept scorer & deduplicator
+│   │   ├── pdf.service.ts     # Gemini Vision OCR PDF extractor
+│   │   └── mcq.service.ts     # Generation, validation & deduplication coordinator
+│   └── types/                 # TypeScript interfaces and domain schemas
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 📄 License & Attribution
+
+Developed for academic NLP research and automated examination generation.
