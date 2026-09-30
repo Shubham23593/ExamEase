@@ -87,6 +87,46 @@ ExamEase/
 │   └── types/                 # TypeScript interfaces and domain schemas
 ```
 
+
+---
+
+## 📄 Final Project Report (Word document + Python generator)
+
+The complete, university-format project report is generated programmatically from a single
+Python script, so every diagram, table, figure caption and page number stays consistent with
+the code base.
+
+```bash
+# 1. installs (only needed once)
+pip install python-docx matplotlib
+
+# 2. move into the report folder
+cd docs/final-report
+
+# 3. generate the report
+python ExamEase_Report_Generator.py
+```
+
+Generated artefacts:
+
+| File | Description |
+| :--- | :--- |
+| `docs/final-report/ExamEase_Final_Project_Report.docx` | Final report — title page, certificate, declaration, acknowledgement, abstract, Table of Contents, List of Figures, List of Tables, abbreviations, 9 chapters, references and 4 appendices |
+| `docs/final-report/assets/diagrams/*.png` | 17 engineering diagrams: layered architecture, activity workflow, use case, DFD levels 0/1/2, NLP pipeline, class diagram, ER diagram, sequence diagram, AI factory fallback, de-duplication flow and result charts |
+| `docs/final-report/assets/screenshots/*.png` | 16 pre-formatted screenshot placeholders (Figures 8.1 – 8.16) |
+| `docs/final-report/assets/SCREENSHOT_GUIDE.md` | Which screenshot belongs to which figure and how to capture it |
+
+**Adding your own screenshots:** right click a placeholder inside MS Word → *Change Picture* →
+*This Device*, or drop a real PNG with the same file name into
+`docs/final-report/assets/screenshots/` and re-run the script.
+
+**After opening the DOCX:** Word asks to update fields — click **Yes** (or press `Ctrl + A`
+then `F9`) so that the Table of Contents, the List of Figures, the List of Tables and the page
+numbers are populated.
+
+Edit the `CONFIG` dictionary at the top of `ExamEase_Report_Generator.py` to change the student
+name, roll number, guide name, college, university or academic year, then regenerate.
+
 ---
 
 ## 📄 License & Attribution
